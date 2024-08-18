@@ -45,16 +45,14 @@ body {
     .products {
         grid-template-columns: 300px 300px;
     }
-
-    .shopcart {}
 }
+
+
 
 @media (max-width: 1024px) {
     .products {
         grid-template-columns: 300px;
     }
-
-    .shopcart {}
 }
 
 
@@ -129,4 +127,11 @@ button:hover {
     margin-left: 20px;
     border-radius: 8px;
     background-color: white;
+}
+
+.delete {
+    width: 20px;
+    height: 20px;
+    border: none;
+    color:  rgb(184, 155, 184);
 }

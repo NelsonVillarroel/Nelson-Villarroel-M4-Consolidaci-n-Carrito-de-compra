@@ -65,12 +65,54 @@ function update() {
         itemCart.textContent = `${item.quantity} x ${item.name}: $${(item.price * item.quantity).toLocaleString('es-CL')}`;
         itemsContainer.appendChild(itemCart);
 
+        // crear botón de eliminar
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'X';
+        deleteButton.className = 'delete';
+        deleteButton.addEventListener('click', () => deleteItem(item.id));
+
+        // agregar el botón al elemento del carrito
+        itemCart.appendChild(deleteButton);
+        itemsContainer.appendChild(itemCart);
+
+        // función eliminar del carrito
+        function deleteItem(id) {
+            // elimina el item
+            cart = cart.filter(item => item.id !== id);
+
+            // aplica función update 
+            update();
+        }
+
         // suma al total
         totalPrice += item.price * item.quantity;
     });
 
     // muestra el total
     totalContainer.textContent = `Total: $${totalPrice.toLocaleString('es-CL')}`;
+    
+}
+
+// click button finish
+const finishButton = document.querySelector('.finish');
+
+finishButton.addEventListener('click', finalizePurchase);
+
+// función finalizar compra
+function finalizePurchase() {
+
+    if (cart.length === 0) {
+
+        alert('Su carrito está vacío.\nAgregue algún producto para realizar la compra.');
+
+    } else {
+
+        let totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+        alert(`Realizó una compra con un total de: $${totalPrice.toLocaleString('es-CL')}.\n¡Muchas gracias por preferirnos!`);
+        window.location.reload();
+
+    }
 }
 
 
